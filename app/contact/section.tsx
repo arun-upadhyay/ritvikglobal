@@ -159,7 +159,7 @@ export default function ContactForm() {
                     <div className="flex items-start gap-2 rounded-2xl bg-green-50 px-4 py-3 text-sm text-green-700">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
                       <span>
-                    Email client opened. If it did not, use the direct email on the right.
+                        Message sent successfully. Thanks for contacting us — our team will be in touch shortly.
                   </span>
                     </div>
                 )}

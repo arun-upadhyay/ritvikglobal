@@ -23,6 +23,15 @@ function escapeAttr(input: string) {
 
 export async function POST(req: Request) {
   try {
+
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+          { ok: false, error: "Server not configured. Missing RESEND_API_KEY." },
+          { status: 500 }
+      );
+    }
+
     const body = await req.json();
 
     const name = String(body?.name ?? "").trim();
