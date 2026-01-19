@@ -1,4 +1,14 @@
-import { Compass, Megaphone, Sparkles, Server, Shield, LineChart, ShoppingCart, Bug } from "lucide-react";
+import {
+  Compass,
+  Megaphone,
+  Sparkles,
+  Server,
+  Shield,
+  LineChart,
+  ShoppingCart,
+  Bug,
+} from "lucide-react";
+import Link from "next/link";
 import Button from "../../components/button";
 
 const items = [
@@ -41,41 +51,165 @@ const items = [
     title: "QA and Testing",
     icon: Bug,
     desc: "Test strategy, automation support, and release readiness checks to reduce regressions.",
-  }
+  },
 ];
 
 export default function ServicesPage() {
   return (
-    <div>
-      <section className="bg-slate-50 border-b border-slate-100">
-        <div className="container py-16">
-          <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">Services</p>
-          <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Solutions built for real business outcomes</h1>
-          <p className="mt-4 max-w-2xl text-slate-600">
-            This Next.js project keeps all content locally in code. You can easily edit the text, add pages, and swap icons and images without any database.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href="/contact">Request a consultation</Button>
-            <Button href="/" variant="secondary">Back to home</Button>
-          </div>
-        </div>
-      </section>
+      <main className="min-h-screen bg-white">
+        {/* HERO with full width background image */}
+        <section className="relative isolate overflow-hidden border-b">
+          <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/images/services-hero.png')" }}
+              aria-hidden="true"
+          />
 
-      <section className="bg-white">
-        <div className="container py-16">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {items.map((it) => (
-              <div key={it.title} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
-                  <it.icon className="h-5 w-5" />
-                </div>
-                <h2 className="mt-5 text-lg font-semibold">{it.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{it.desc}</p>
-              </div>
-            ))}
+          {/* Overlay for readability */}
+          <div
+              className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/60 to-slate-950/85"
+              aria-hidden="true"
+          />
+
+          {/* Subtle highlight texture */}
+          <div
+              className="absolute inset-0 opacity-25 [background:radial-gradient(900px_circle_at_15%_20%,rgba(59,130,246,0.22),transparent_45%),radial-gradient(700px_circle_at_85%_30%,rgba(255,255,255,0.12),transparent_50%)]"
+              aria-hidden="true"
+          />
+
+          <div className="relative container py-20 sm:py-28">
+            <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+              Solutions built for real business outcomes
+            </h1>
+
+            <p className="mt-6 max-w-3xl text-base leading-7 text-slate-200">
+              Clear strategy, fast execution, and maintainable delivery. We help
+              teams modernize systems, grow digital presence, and operate securely.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button href="/contact">Request a consultation</Button>
+              <Button href="/" variant="secondary">
+                Back to home
+              </Button>
+            </div>
+
+            {/* Quick highlights row */}
+            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+              {[
+                ["Practical delivery", "Roadmaps and hands on build support"],
+                ["Modern stack", "Next.js, APIs, cloud, automation"],
+                ["Security aware", "Best practices built into process"],
+              ].map(([k, v]) => (
+                  <div
+                      key={k}
+                      className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur"
+                  >
+                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-200">
+                      {k}
+                    </div>
+                    <div className="mt-1 text-sm text-slate-100">{v}</div>
+                  </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        {/* SERVICES GRID */}
+        <section className="bg-slate-50">
+          <div className="container py-16">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">
+                  Capabilities
+                </p>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
+                  What we deliver
+                </h2>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                  Engagements can be project based or ongoing support depending on
+                  your needs.
+                </p>
+              </div>
+
+              <Link
+                  href="/contact"
+                  className="hidden rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 sm:inline-flex"
+              >
+                Get pricing
+              </Link>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {items.map((it) => (
+                  <div
+                      key={it.title}
+                      className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+                  >
+                    {/* hover glow */}
+                    <div
+                        className="pointer-events-none absolute -inset-px opacity-0 transition group-hover:opacity-100"
+                        aria-hidden="true"
+                    >
+                      <div className="absolute inset-0 rounded-3xl [background:radial-gradient(600px_circle_at_20%_10%,rgba(59,130,246,0.16),transparent_55%)]" />
+                    </div>
+
+                    <div className="relative">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                          <it.icon className="h-5 w-5" />
+                        </div>
+
+                        <h3 className="text-lg font-semibold text-slate-900">
+                          {it.title}
+                        </h3>
+                      </div>
+
+                      <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                        {it.desc}
+                      </p>
+
+                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-900">
+                        Learn more
+                        <span className="transition-transform group-hover:translate-x-0.5">
+                      →
+                    </span>
+                      </div>
+                    </div>
+                  </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="mt-12 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+              <div className="grid gap-6 md:grid-cols-3 md:items-center">
+                <div className="md:col-span-2">
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    Want a plan for your next 30 days
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    We can map quick wins, risks, and a delivery plan that fits
+                    your team and budget.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
+                  <Link
+                      href="/contact"
+                      className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+                  >
+                    Book a call
+                  </Link>
+                  <Link
+                      href="/about"
+                      className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50"
+                  >
+                    About us
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
   );
 }

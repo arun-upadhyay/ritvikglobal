@@ -1,135 +1,159 @@
 import Link from "next/link";
-import { Phone, Mail, Facebook, Linkedin } from "lucide-react";
+import { Phone, Mail, Facebook, Linkedin, ArrowRight } from "lucide-react";
 
 export default function Footer() {
   return (
-      <footer className="border-t border-slate-200 bg-white">
-        <div className="container grid gap-10 py-14 md:grid-cols-4">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 font-bold tracking-tight">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-sm">
-              RG
-            </span>
-              <span className="text-slate-900">Ritvik Global</span>
+      <footer className="relative overflow-hidden border-t border-slate-200/70 bg-white">
+        {/* subtle background accents */}
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-200/40 blur-3xl" />
+          <div className="absolute -bottom-28 right-[-6rem] h-72 w-72 rounded-full bg-slate-200/60 blur-3xl" />
+        </div>
+
+        <div className="relative container py-14">
+          <div className="grid gap-10 md:grid-cols-4">
+            {/* Brand + CTA */}
+            <div className="space-y-5 text-center md:text-left">
+              <div className="flex items-center justify-center gap-3 md:justify-start">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-sm font-bold text-white shadow-sm">
+                RG
+              </span>
+                <div className="leading-tight">
+                  <div className="text-sm font-semibold text-slate-900">Ritvik Global</div>
+                  <div className="text-xs text-slate-500">Innovating today. Building tomorrow.</div>
+                </div>
+              </div>
+
+              <p className="text-sm leading-relaxed text-slate-600">
+                Practical consulting and modern delivery for teams that need reliable outcomes and clean execution.
+              </p>
+
+              <div className="flex justify-center md:justify-start">
+                <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
+                >
+                  Get in touch <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
 
-            <p className="text-sm text-slate-600">
-              Innovating today. Building tomorrow.
-            </p>
+            {/* Services */}
+            <div className="space-y-4 text-center md:text-left">
+              <h3 className="text-sm font-semibold text-slate-900">Services</h3>
 
-            <div className="text-sm text-slate-600 leading-relaxed">
-              <div>2518 Sakeena Ct</div>
-              <div>Bedford, TX 76022</div>
-              <div>USA</div>
-            </div>
-          </div>
-
-          {/* Services */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-slate-900">Services</h3>
-            <ul className="space-y-2 text-sm">
-              {[
-                "Managed IT Services",
-                "Managed Security Services",
-                "IT Consulting",
-                "Digital Marketing",
-                "UI UX Design",
-                "Data Analytics",
-                "eCommerce Solutions",
-                "QA and Testing",
-              ].map((s) => (
-                  <li
-                      key={s}
-                      className="group cursor-default text-slate-600 transition hover:text-slate-900"
-                  >
-                <span className="relative">
-                  {s}
-                  <span className="absolute -bottom-0.5 left-0 h-[1px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
-                </span>
-                  </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-slate-900">Company</h3>
-            <ul className="space-y-2 text-sm">
-              {[
-                { href: "/", label: "Home" },
-                { href: "/about", label: "About Us" },
-                { href: "/blog", label: "Blog" },
-                { href: "/careers", label: "Careers" },
-                { href: "/case-studies", label: "Case Studies" },
-                { href: "/contact", label: "Contact Us" },
-              ].map((it) => (
-                  <li key={it.label}>
-                    <Link
-                        href={it.href}
-                        className="group inline-flex items-center text-slate-600 transition hover:text-slate-900"
-                    >
-                  <span className="relative">
-                    {it.label}
-                    <span className="absolute -bottom-0.5 left-0 h-[1px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+              {/* Center list on mobile, left on desktop */}
+              <ul className="space-y-2 text-sm md:space-y-2 md:text-left">
+                {[
+                  "Managed IT Services",
+                  "Managed Security Services",
+                  "IT Consulting",
+                  "Digital Marketing",
+                  "UI UX Design",
+                  "Data Analytics",
+                  "eCommerce Solutions",
+                  "QA and Testing",
+                ].map((s) => (
+                    <li key={s} className="flex justify-center md:justify-start">
+                  <span className="group inline-flex cursor-default items-center text-slate-600 transition hover:text-slate-900">
+                    <span className="relative">
+                      {s}
+                      <span className="absolute -bottom-0.5 left-0 h-[1px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                    </span>
                   </span>
-                    </Link>
-                  </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-slate-900">Contact</h3>
-
-            <div className="space-y-3 text-sm text-slate-600">
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-blue-600" />
-                <span>+1 (603) 660-7055</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-blue-600" />
-                <span>info@ritvikglobal.com</span>
-              </div>
+                    </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="flex gap-4 pt-2">
-              <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"
-                  aria-label="Facebook"
-              >
-                <Facebook className="h-4 w-4" />
-              </a>
+            {/* Company */}
+            <div className="space-y-4 text-center md:text-left">
+              <h3 className="text-sm font-semibold text-slate-900">Company</h3>
 
-              <a
-                  href="https://www.linkedin.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"
-                  aria-label="LinkedIn"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
+              <ul className="space-y-2 text-sm">
+                {[
+                  { href: "/", label: "Home" },
+                  { href: "/about", label: "About Us" },
+                  { href: "/services", label: "Services" },
+                  { href: "/contact", label: "Contact Us" },
+                  { href: "/careers", label: "Careers" },
+                ].map((it) => (
+                    <li key={it.label} className="flex justify-center md:justify-start">
+                      <Link
+                          href={it.href}
+                          className="group inline-flex items-center text-slate-600 transition hover:text-slate-900"
+                      >
+                    <span className="relative">
+                      {it.label}
+                      <span className="absolute -bottom-0.5 left-0 h-[1px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                    </span>
+                      </Link>
+                    </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div className="space-y-4 text-center md:text-left">
+              <h3 className="text-sm font-semibold text-slate-900">Contact</h3>
+
+              <div className="mx-auto w-full max-w-sm rounded-2xl border border-slate-200/70 bg-white p-4 shadow-sm md:mx-0">
+                <div className="space-y-3 text-sm text-slate-700">
+                  <div className="flex items-center justify-center gap-2 md:justify-start">
+                    <Phone className="h-4 w-4 text-blue-700" />
+                    <span className="font-medium text-slate-900">+1 (603) 660-7055</span>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-2 md:justify-start">
+                    <Mail className="h-4 w-4 text-blue-700" />
+                    <span className="font-medium text-slate-900">info@ritvikglobal.com</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-center gap-3 md:justify-start">
+                  <a
+                      href="https://www.facebook.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                      aria-label="Facebook"
+                  >
+                    <Facebook className="h-4 w-4" />
+                  </a>
+
+                  <a
+                      href="https://www.linkedin.com/company/ritvik-global/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                      aria-label="LinkedIn"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="text-xs text-slate-500">
+                Available Mon to Fri. For urgent requests, email is fastest.
+              </div>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-slate-200 py-6">
-          <div className="container flex flex-col items-center justify-between gap-2 text-xs text-slate-500 md:flex-row">
-            <div>© {new Date().getFullYear()} Ritvik Global. All rights reserved.</div>
-            <div className="flex items-center gap-4">
-              <a href="#" className="transition hover:text-slate-700">
+        <div className="relative border-t border-slate-200/70 bg-white/60 py-6 backdrop-blur">
+          <div className="container flex flex-col items-center justify-between gap-3 text-xs text-slate-500 md:flex-row">
+            <div className="text-center md:text-left">
+              © {new Date().getFullYear()} Ritvik Global. All rights reserved.
+            </div>
+
+            <div className="flex items-center justify-center gap-4">
+              <Link href="/privacy" className="transition hover:text-slate-700">
                 Privacy
-              </a>
-              <a href="#" className="transition hover:text-slate-700">
+              </Link>
+              <Link href="/terms" className="transition hover:text-slate-700">
                 Terms
-              </a>
+              </Link>
             </div>
           </div>
         </div>

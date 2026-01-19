@@ -64,50 +64,67 @@ const services = [
 ];
 
 const features = [
-  { title: "Future Ready Design", desc: "Solutions that adapt to new technologies and devices." },
-  { title: "Smart Business Integration", desc: "Systems that fit your workflows, from CRMs to payment gateways." },
-  { title: "Scalable and Secure Platforms", desc: "Enterprise grade scalability and security built in." },
+  {
+    title: "Future Ready Design",
+    desc: "Solutions that adapt to new technologies and devices.",
+  },
+  {
+    title: "Smart Business Integration",
+    desc: "Systems that fit your workflows, from CRMs to payment gateways.",
+  },
+  {
+    title: "Scalable and Secure Platforms",
+    desc: "Enterprise grade scalability and security built in.",
+  },
 ];
 
 export default function HomePage() {
+  // @ts-ignore
   return (
-      <div>
+      <main className="min-h-screen bg-white">
         {/* FULL WIDTH HERO SLIDER */}
         <section className="w-full">
-          {/* Keep image edge to edge, but keep content aligned using internal container (HeroSlider handles text) */}
           <HeroSlider slides={slides} className="w-full rounded-none border-x-0" />
         </section>
 
+        {/* INTRO */}
         <section className="relative overflow-hidden">
+          {/* background blobs */}
           <div className="absolute inset-0 -z-10">
             <div className="absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-blue-200/50 blur-3xl" />
             <div className="absolute -bottom-28 right-[-6rem] h-96 w-96 rounded-full bg-slate-200/60 blur-3xl" />
           </div>
 
-          <div className="container py-16 sm:py-20">
+          <div className="container py-14 sm:py-18 md:py-20">
             <div className="grid items-center gap-10 md:grid-cols-2">
-              <div className="space-y-6">
-                <p className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-xs font-semibold text-blue-700 ring-1 ring-blue-100">
+              <div className="space-y-6 text-center md:text-left">
+                <p className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-xs font-semibold text-blue-700 ring-1 ring-blue-100 md:justify-start">
                   Ritvik Global • Innovating Today. Building Tomorrow.
                 </p>
+
                 <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
                   Driving Digital Transformation, Together
                 </h1>
+
                 <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
                   We empower businesses with innovative IT solutions, strategic consulting, and reliable support. From
                   streamlining operations to scaling growth, we help you stay ahead in a fast changing digital world.
                 </p>
 
-                <div className="flex flex-col gap-3 sm:flex-row">
+                <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
                   <Button href="/contact">Get a Free Consultation</Button>
                   <Button href="/services" variant="secondary">
                     Explore Our Services
                   </Button>
                 </div>
 
-                <div className="grid gap-3 pt-4 sm:grid-cols-3">
+                {/* MOBILE FIX: don’t force 3 columns on small phones */}
+                <div className="grid gap-3 pt-4 md:grid-cols-3">
                   {["Client Centered", "Proven Track Record", "Seamless Integration"].map((t) => (
-                      <div key={t} className="flex items-center gap-2 text-sm text-slate-600">
+                      <div
+                          key={t}
+                          className="flex items-center justify-center gap-2 text-sm text-slate-600 md:justify-start"
+                      >
                         <CheckCircle2 className="h-4 w-4 text-blue-600" />
                         <span>{t}</span>
                       </div>
@@ -115,38 +132,56 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* right side card */}
               <div className="relative">
-                <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
+                <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm">
                   <div className="space-y-4">
                     <div className="text-sm font-semibold text-slate-900">What we deliver</div>
-                    <div className="grid gap-3 sm:grid-cols-2">
+
+                    {/* MOBILE FIX: keep 1 column until md */}
+                    <div className="grid gap-3 md:grid-cols-2">
                       {["IT Consulting", "Managed Services", "Cybersecurity", "UI UX", "Digital Marketing", "Analytics"].map(
                           (t) => (
                               <div
                                   key={t}
-                                  className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800"
+                                  className="rounded-2xl border border-slate-200/70 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800"
                               >
                                 {t}
                               </div>
                           )
                       )}
                     </div>
-                    <div className="rounded-2xl bg-blue-600 p-5 text-white">
+
+                    <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-5 text-white">
                       <div className="text-sm font-semibold">Need a quick plan</div>
-                      <p className="mt-1 text-sm text-blue-100">
+                      <p className="mt-1 text-sm text-white/85">
                         Tell us your goals and we will propose a clear roadmap, timeline, and next steps.
                       </p>
-                      <Link href="/contact" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white">
+                      <Link
+                          href="/contact"
+                          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white"
+                      >
                         Contact us <ArrowRight className="h-4 w-4" />
                       </Link>
                     </div>
                   </div>
                 </div>
+
+                {/* small accent border */}
+                <div
+                    className="pointer-events-none absolute -inset-1 -z-10 rounded-[28px] opacity-40 blur-2xl"
+                    aria-hidden="true"
+                    style={{
+                      background:
+                          "radial-gradient(600px circle at 20% 10%, rgba(59,130,246,0.18), transparent 55%)",
+                    }}
+                />
               </div>
             </div>
           </div>
         </section>
 
+        {/* SERVICES */}
         <section className="border-t border-slate-100 bg-white">
           <div className="container py-16">
             <div className="mx-auto max-w-2xl text-center">
@@ -162,12 +197,35 @@ export default function HomePage() {
 
             <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {services.map((s) => (
-                  <div key={s.title} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
-                      <s.icon className="h-5 w-5" />
+                  <div
+                      key={s.title}
+                      className="group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+                  >
+                    <div
+                        className="pointer-events-none absolute -inset-px opacity-0 transition group-hover:opacity-100"
+                        aria-hidden="true"
+                    >
+                      <div className="absolute inset-0 rounded-3xl [background:radial-gradient(600px_circle_at_20%_10%,rgba(59,130,246,0.16),transparent_55%)]" />
                     </div>
-                    <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.desc}</p>
+
+                    <div className="relative">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                          <s.icon className="h-5 w-5" />
+                        </div>
+
+                        <h3 className="text-lg font-semibold text-slate-900 transition group-hover:text-blue-700">
+                          {s.title}
+                        </h3>
+                      </div>
+
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600">{s.desc}</p>
+
+                      <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-900">
+                        Learn more
+                        <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                      </div>
+                    </div>
                   </div>
               ))}
             </div>
@@ -180,11 +238,11 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* OUR JOURNEY */}
         <section className="border-t border-slate-100 bg-slate-50">
           <div className="container py-16">
             <div className="grid gap-10 md:grid-cols-2">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">Our Journey</p>
+              <div className="text-center md:text-left">
                 <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
                   Shaping Smarter Businesses Through Technology and Expertise
                 </h2>
@@ -192,30 +250,20 @@ export default function HomePage() {
                   Founded to bridge business challenges and technology solutions. We believe growth comes from innovation,
                   adaptability, and trust.
                 </p>
-                <ul className="mt-6 space-y-3 text-sm text-slate-700">
-                  {["Client centered approach", "Proven track record", "Seamless technology integration"].map((t) => (
-                      <li key={t} className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-blue-700" />
-                        <span>{t}</span>
-                      </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  {/* This should go to /about, not /services */}
-                  <Button href="/about">Learn more about us</Button>
-                </div>
               </div>
 
-              <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
-                <h3 className="text-lg font-semibold">Unlock Growth with Tailored IT Solutions</h3>
+
+              <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-slate-900">Unlock Growth with Tailored IT Solutions</h3>
                 <p className="mt-2 text-sm text-slate-600">
                   We create technology that adapts to your business needs helping you operate smarter, scale faster, and
                   deliver more value.
                 </p>
+
                 <div className="mt-6 grid gap-4">
                   {features.map((f) => (
-                      <div key={f.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                        <div className="text-sm font-semibold">{f.title}</div>
+                      <div key={f.title} className="rounded-2xl border border-slate-200/70 bg-slate-50 p-4">
+                        <div className="text-sm font-semibold text-slate-900">{f.title}</div>
                         <div className="mt-1 text-sm text-slate-600">{f.desc}</div>
                       </div>
                   ))}
@@ -225,6 +273,7 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* PROCESS */}
         <section className="border-t border-slate-100 bg-white">
           <div className="container py-16">
             <div className="mx-auto max-w-2xl text-center">
@@ -253,10 +302,13 @@ export default function HomePage() {
                   desc: "We test, gather feedback, and refine so your solution performs smoothly in real world conditions.",
                 },
               ].map((s) => (
-                  <div key={s.num} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
-                    <div className="text-sm font-semibold text-blue-700">{s.num}</div>
-                    <h3 className="mt-2 text-lg font-semibold">{s.title}</h3>
+                  <div
+                      key={s.num}
+                      className="group rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+                  >
+                    <h3 className="mt-2 text-lg font-semibold text-slate-900">{s.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.desc}</p>
+
                     <div className="mt-6">
                       <Button href="/contact" variant="secondary" className="w-full">
                         Talk to us
@@ -268,19 +320,21 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* FINAL CTA */}
         <section className="border-t border-slate-100 bg-slate-900">
           <div className="container py-16">
-            <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 shadow-soft sm:p-12">
+            <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 shadow-sm sm:p-12">
               <div className="grid items-center gap-8 md:grid-cols-2">
                 <div>
                   <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                     Ready to Take Your Business to the Next Level
                   </h2>
-                  <p className="mt-3 text-blue-100">
+                  <p className="mt-3 text-white/85">
                     Let Ritvik Global guide your digital journey with tailored solutions, strategic consulting, and proven
                     expertise.
                   </p>
                 </div>
+
                 <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
                   <Button href="/contact" className="bg-white text-slate-900 hover:bg-slate-100">
                     Contact Us Now
@@ -297,6 +351,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      </div>
+      </main>
   );
 }
