@@ -6,13 +6,14 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 function isEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
+
 function escapeHtml(input: string) {
   return input
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function escapeAttr(input: string) {
@@ -20,15 +21,13 @@ function escapeAttr(input: string) {
   return escapeHtml(input).replaceAll(" ", "%20");
 }
 
-
 export async function POST(req: Request) {
   try {
-
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-          { ok: false, error: "Server not configured. Missing RESEND_API_KEY." },
-          { status: 500 }
+        { ok: false, error: "Server not configured. Missing RESEND_API_KEY." },
+        { status: 500 },
       );
     }
 
@@ -42,16 +41,26 @@ export async function POST(req: Request) {
     if (!name || !email || !message) {
       return NextResponse.json(
         { ok: false, error: "Name, email, and message are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!isEmail(email)) {
-      return NextResponse.json({ ok: false, error: "Invalid email." }, { status: 400 });
+      return NextResponse.json(
+        { ok: false, error: "Invalid email." },
+        { status: 400 },
+      );
+    }
+    const website = String(body?.website ?? "").trim();
+
+    // Honeypot: if filled, treat as spam. Return ok so bots don't learn.
+    if (website) {
+      return NextResponse.json({ ok: true });
     }
 
     const to = process.env.CONTACT_TO_EMAIL || "info@ritvikglobal.com";
-    const from = process.env.CONTACT_FROM_EMAIL || "Ritvik Global <onboarding@resend.dev>";
+    const from =
+      process.env.CONTACT_FROM_EMAIL || "Ritvik Global <onboarding@resend.dev>";
 
     await resend.emails.send({
       from,
@@ -126,12 +135,11 @@ export async function POST(req: Request) {
   `,
     });
 
-
     return NextResponse.json({ ok: true });
   } catch (err) {
     return NextResponse.json(
       { ok: false, error: "Failed to send email." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

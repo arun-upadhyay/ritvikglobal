@@ -18,6 +18,7 @@ type FormState = {
   email: string;
   company: string;
   message: string;
+  website: string; // honeypot
 };
 
 export default function ContactForm() {
@@ -26,6 +27,7 @@ export default function ContactForm() {
     email: "",
     company: "",
     message: "",
+    website: "",
   });
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -67,7 +69,7 @@ export default function ContactForm() {
       }
 
       setSent(true);
-      setForm({ name: "", email: "", company: "", message: "" });
+      setForm({ name: "", email: "", company: "", message: "", website: "", });
     } catch {
       setError("Network error. Please try again.");
     }
@@ -102,6 +104,20 @@ export default function ContactForm() {
               </div>
 
               <form className="mt-6 space-y-4" onSubmit={onSubmit}>
+                <div className="hidden" aria-hidden="true">
+                  <label>
+                    Website
+                    <input
+                        type="text"
+                        name="website"
+                        value={form.website}
+                        onChange={(e) => update("website", e.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
+                    />
+                  </label>
+                </div>
+
                 <div className="grid gap-4 sm:grid-cols-2">
                   <label className="space-y-2">
                     <span className="text-sm font-medium text-slate-800">Name *</span>
