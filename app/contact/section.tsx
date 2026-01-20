@@ -49,7 +49,7 @@ export default function ContactForm() {
   const [error, setError] = useState<string | null>(null);
   const [isSending, setIsSending] = useState(false);
 
-  // ✅ ensures the file input visually clears after submit
+  // ensures the file input visually clears after submit
   const [fileInputKey, setFileInputKey] = useState(0);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
@@ -66,9 +66,7 @@ export default function ContactForm() {
       return;
     }
 
-    // Basic client side checks (server side still validates)
     if (form.resume) {
-      // NOTE: some browsers may return "" for type, so keep a fallback check.
       const isPdf =
         form.resume.type === "application/pdf" ||
         form.resume.name.toLowerCase().endsWith(".pdf");
@@ -91,12 +89,12 @@ export default function ContactForm() {
       fd.append("email", form.email);
       fd.append("company", form.company);
       fd.append("message", form.message);
-      fd.append("website", form.website); // honeypot
+      fd.append("website", form.website);
       if (form.resume) fd.append("resume", form.resume);
 
       const res = await fetch("/api/contact", {
         method: "POST",
-        body: fd, // IMPORTANT
+        body: fd,
       });
 
       const data = await res.json();
@@ -116,7 +114,6 @@ export default function ContactForm() {
         resume: null,
       });
 
-      // ✅ clears file picker UI
       setFileInputKey((k) => k + 1);
     } catch {
       setError("Network error. Please try again.");
@@ -148,7 +145,7 @@ export default function ContactForm() {
                 </p>
               </div>
 
-              <div className="hidden sm:flex items-center gap-2 rounded-2xl bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200/70">
+              <div className="hidden items-center gap-2 rounded-2xl bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200/70 sm:flex">
                 <Clock className="h-4 w-4 text-blue-700" />
                 Typical reply: 24 hours
               </div>
@@ -234,7 +231,7 @@ export default function ContactForm() {
                   <FileText className="h-4 w-4 text-slate-500" />
 
                   <input
-                    key={fileInputKey} // ✅ lets us reset the picker
+                    key={fileInputKey}
                     type="file"
                     accept="application/pdf"
                     onChange={(e) =>
@@ -304,9 +301,11 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* RIGHT SIDEBAR (unchanged) */}
+      {/* RIGHT SIDEBAR */}
       <div className="lg:col-span-2 space-y-6">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        {/* FIX: use 2 columns earlier than sm to avoid "unused right space" on ~520-639px */}
+        <div className="grid gap-4 min-[520px]:grid-cols-2 lg:grid-cols-1">
+          {/* Address */}
           <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
@@ -324,8 +323,21 @@ export default function ContactForm() {
               <div>Bedford, TX 76022</div>
               <div>USA</div>
             </div>
+
+            {/* optional action */}
+            <div className="mt-4">
+              <Link
+                href="https://maps.google.com/?q=2518%20Sakeena%20Ct%20Bedford%20TX%2076022"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
+              >
+                Open in Maps <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
 
+          {/* Phone */}
           <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
@@ -343,32 +355,58 @@ export default function ContactForm() {
                 +1 (603) 660-7055
               </span>
             </div>
-          </div>
-        </div>
 
-        <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
-              <Mail className="h-5 w-5" />
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-slate-900">Email</div>
-              <div className="text-sm text-slate-600">Direct contact</div>
+            {/* optional action */}
+            <div className="mt-4">
+              <Link
+                href="tel:+16036607055"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
+              >
+                Call now <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
 
-          <div className="mt-4 space-y-2 text-sm text-slate-700">
-            <div>
-              <span className="font-medium text-slate-900">
-                info@ritvikglobal.com
-              </span>
+          {/* Email spans full width in the 2-col mid breakpoint */}
+          <div className="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm min-[520px]:col-span-2 lg:col-span-1">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                <Mail className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-slate-900">
+                  Email
+                </div>
+                <div className="text-sm text-slate-600">Direct contact</div>
+              </div>
             </div>
-            <Link
-              href="mailto:info@ritvikglobal.com"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
-            >
-              Email us now <ArrowRight className="h-4 w-4" />
-            </Link>
+
+            <div className="mt-4 space-y-2 text-sm text-slate-700">
+              <div>
+                <span className="font-medium text-slate-900">
+                  info@ritvikglobal.com
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                <Link
+                  href="mailto:info@ritvikglobal.com"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
+                >
+                  Email us now <ArrowRight className="h-4 w-4" />
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    navigator.clipboard?.writeText("info@ritvikglobal.com")
+                  }
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:ml-auto"
+                >
+                  Copy email
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -40,26 +40,31 @@ const services = [
     title: "Strategic Consulting",
     icon: Compass,
     desc: "Align technology with your goals for measurable results and long term success.",
+    href: "/services#strategic-consulting",
   },
   {
     title: "Digital Growth Marketing",
     icon: Megaphone,
     desc: "Blend creativity and analytics to boost visibility, generate leads, and fuel expansion.",
+    href: "/services#digital-marketing",
   },
   {
     title: "UI UX Innovation",
     icon: Sparkles,
     desc: "Design intuitive experiences that feel great on every device.",
+    href: "/services#ui-ux",
   },
   {
     title: "Managed IT Services",
     icon: Server,
     desc: "Monitoring, updates, and support to keep your systems running smoothly.",
+    href: "/services#managed-it",
   },
   {
     title: "Managed Security Services",
     icon: Shield,
     desc: "Proactive monitoring and response to protect data, systems, and reputation.",
+    href: "/services#security",
   },
 ];
 
@@ -82,7 +87,8 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
       {/* FULL WIDTH HERO SLIDER WITH WAVE CUT */}
-      <section className="relative w-full overflow-hidden bg-white">
+      {/* Improvement: add bottom padding so wave never overlaps slider content */}
+      <section className="relative w-full overflow-hidden bg-white pb-14 sm:pb-16 md:pb-20">
         <HeroSlider
           slides={slides}
           className="w-full rounded-none border-x-0"
@@ -90,26 +96,27 @@ export default function HomePage() {
 
         {/* WAVE CUTOUT */}
         <svg
-          className="pointer-events-none absolute bottom-0 left-0 z-10 block h-24 w-full sm:h-28 md:h-32"
+          className="pointer-events-none absolute bottom-0 left-0 z-10 block h-20 w-full sm:h-24 md:h-28 lg:h-32"
           viewBox="0 0 1440 120"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
           <path
             d="
-        M0,80
-        C120,110 240,110 360,90
-        C480,70 600,40 720,60
-        C840,80 960,110 1080,90
-        C1200,70 1320,40 1440,60
-        L1440,120
-        L0,120
-        Z
-      "
+              M0,80
+              C120,110 240,110 360,90
+              C480,70 600,40 720,60
+              C840,80 960,110 1080,90
+              C1200,70 1320,40 1440,60
+              L1440,120
+              L0,120
+              Z
+            "
             fill="#ffffff"
           />
         </svg>
       </section>
+
       {/* INTRO */}
       <section className="relative overflow-hidden">
         {/* background blobs */}
@@ -118,33 +125,35 @@ export default function HomePage() {
           <div className="absolute -bottom-28 right-[-6rem] h-96 w-96 rounded-full bg-slate-200/60 blur-3xl" />
         </div>
 
-        <div className="container py-14 sm:py-18 md:py-20">
+        <div className="container px-4 py-14 sm:px-6 sm:py-18 md:py-20 lg:px-8">
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div className="space-y-6 text-center md:text-left">
               <p className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-xs font-semibold text-blue-700 ring-1 ring-blue-100 md:justify-start">
                 Ritvik Global • Innovating Today. Building Tomorrow.
               </p>
 
-              <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+              {/* Improvement: text-balance + leading-tight so long headings wrap nicely */}
+              <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
                 Driving Digital Transformation, Together
               </h1>
 
-              <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
+              <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg md:mx-0">
                 We empower businesses with innovative IT solutions, strategic
                 consulting, and reliable support. From streamlining operations
                 to scaling growth, we help you stay ahead in a fast changing
                 digital world.
               </p>
 
-              <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
+              {/* Improvement: buttons stretch on tiny screens for easier tapping */}
+              <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
                 <Button href="/contact">Get a Free Consultation</Button>
                 <Button href="/services" variant="secondary">
                   Explore Our Services
                 </Button>
               </div>
 
-              {/* MOBILE FIX: don’t force 3 columns on small phones */}
-              <div className="grid gap-3 pt-4 md:grid-cols-3">
+              {/* Improvement: stays readable on tiny screens, expands on larger */}
+              <div className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-3">
                 {[
                   "Client Centered",
                   "Proven Track Record",
@@ -154,7 +163,7 @@ export default function HomePage() {
                     key={t}
                     className="flex items-center justify-center gap-2 text-sm text-slate-600 md:justify-start"
                   >
-                    <CheckCircle2 className="h-4 w-4 text-blue-600" />
+                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-blue-600" />
                     <span>{t}</span>
                   </div>
                 ))}
@@ -169,8 +178,8 @@ export default function HomePage() {
                     What we deliver
                   </div>
 
-                  {/* MOBILE FIX: keep 1 column until md */}
-                  <div className="grid gap-3 md:grid-cols-2">
+                  {/* Improvement: 2 cols mobile, 3 cols on small+ for better use of space */}
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     {[
                       "IT Consulting",
                       "Managed Services",
@@ -181,7 +190,7 @@ export default function HomePage() {
                     ].map((t) => (
                       <div
                         key={t}
-                        className="rounded-2xl border border-slate-200/70 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800"
+                        className="rounded-2xl border border-slate-200/70 bg-slate-50 px-3 py-3 text-center text-sm font-medium text-slate-800 sm:px-4"
                       >
                         {t}
                       </div>
@@ -198,7 +207,7 @@ export default function HomePage() {
                     </p>
                     <Link
                       href="/contact"
-                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white"
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:gap-3 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-indigo-700"
                     >
                       Contact us <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -206,7 +215,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* small accent border */}
+              {/* accent glow */}
               <div
                 className="pointer-events-none absolute -inset-1 -z-10 rounded-[28px] opacity-40 blur-2xl"
                 aria-hidden="true"
@@ -219,28 +228,32 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       {/* SERVICES */}
       <section className="border-t border-slate-100 bg-white">
-        <div className="container py-16">
+        <div className="container px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">
               Services
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mt-3 text-balance text-2xl font-bold leading-tight tracking-tight sm:text-3xl md:text-4xl">
               Solutions That Drive Your Business Forward
             </h2>
-            <p className="mt-4 text-slate-600">
+            <p className="mt-4 text-sm text-slate-600 sm:text-base">
               From strategy to execution, we deliver end to end services
               designed to accelerate growth, improve efficiency, and keep you
               future ready.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Improvement: make cards fully clickable + add focus ring */}
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
-              <div
+              <Link
                 key={s.title}
-                className="group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+                href={s.href}
+                className="group relative block overflow-hidden rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={`Learn more about ${s.title}`}
               >
                 <div
                   className="pointer-events-none absolute -inset-px opacity-0 transition group-hover:opacity-100"
@@ -271,7 +284,7 @@ export default function HomePage() {
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
@@ -282,15 +295,16 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       {/* OUR JOURNEY */}
       <section className="border-t border-slate-100 bg-slate-50">
-        <div className="container py-16">
+        <div className="container px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid gap-10 md:grid-cols-2">
             <div className="text-center md:text-left">
-              <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="mt-3 text-balance text-2xl font-bold leading-tight tracking-tight sm:text-3xl md:text-4xl">
                 Shaping Smarter Businesses Through Technology and Expertise
               </h2>
-              <p className="mt-4 text-slate-600">
+              <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-600 sm:text-base md:mx-0">
                 Founded to bridge business challenges and technology solutions.
                 We believe growth comes from innovation, adaptability, and
                 trust.
@@ -323,22 +337,23 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       {/* PROCESS */}
       <section className="border-t border-slate-100 bg-white">
-        <div className="container py-16">
+        <div className="container px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">
               How we work
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mt-3 text-balance text-2xl font-bold leading-tight tracking-tight sm:text-3xl md:text-4xl">
               Our Proven Process to Deliver Lasting Impact
             </h2>
-            <p className="mt-4 text-slate-600">
+            <p className="mt-4 text-sm text-slate-600 sm:text-base">
               Clear steps. Transparent collaboration. Quality delivery.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 num: "01",
@@ -381,16 +396,17 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       {/* FINAL CTA */}
       <section className="border-t border-slate-100 bg-slate-900">
-        <div className="container py-16">
-          <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 shadow-sm sm:p-12">
+        <div className="container px-4 py-16 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-6 shadow-sm sm:p-8 md:p-12">
             <div className="grid items-center gap-8 md:grid-cols-2">
               <div>
-                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                <h2 className="text-balance text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl">
                   Ready to Take Your Business to the Next Level
                 </h2>
-                <p className="mt-3 text-white/85">
+                <p className="mt-3 text-sm text-white/85 sm:text-base">
                   Let Ritvik Global guide your digital journey with tailored
                   solutions, strategic consulting, and proven expertise.
                 </p>
@@ -399,14 +415,14 @@ export default function HomePage() {
               <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
                 <Button
                   href="/contact"
-                  className="bg-white text-slate-900 hover:bg-slate-100"
+                  className="w-full bg-white text-slate-900 hover:bg-slate-100 sm:w-auto"
                 >
                   Contact Us Now
                 </Button>
                 <Button
                   href="/services"
                   variant="secondary"
-                  className="bg-transparent text-white ring-white/25 hover:bg-white/10"
+                  className="w-full bg-transparent text-white ring-white/25 hover:bg-white/10 sm:w-auto"
                 >
                   Explore Services
                 </Button>
